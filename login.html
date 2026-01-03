@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FoodLink | Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #2f9e44, #1c7c54);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-card {
+      background: #ffffff;
+      width: 360px;
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    /* ---------- LOGO ---------- */
+    .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .logo-wrapper img {
+      width: 120px;       /* ✅ FIXED SIZE */
+      height: auto;
+      object-fit: contain;
+    }
+
+    h1 {
+      margin: 8px 0 4px;
+      font-size: 22px;
+      color: #1f2937;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-size: 13px;
+      margin: 12px 0 6px;
+      color: #374151;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #2f9e44;
+    }
+
+    .role-box {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .role {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1.5px solid #d1d5db;
+      cursor: pointer;
+      font-size: 14px;
+      background: #f9fafb;
+    }
+
+    .role.active {
+      border-color: #2f9e44;
+      background: #e6f7ee;
+      color: #166534;
+      font-weight: 600;
+    }
+
+    button {
+      margin-top: 18px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 14px;
+      border: none;
+      background: #2f9e44;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #22863a;
+    }
+
+    .footer {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+
+    <!-- LOGO -->
+    <div class="logo-wrapper">
+      <img src="images/foodlink.png.jpeg" alt="FoodLink Logo">
+    </div>
+
+    <h1>FoodLink</h1>
+    <div class="subtitle">Connecting Mess Surplus to NGOs</div>
+
+    <label>Email or Mobile Number</label>
+    <input type="text" placeholder="example@email.com or 9876543210">
+
+    <label>Select Role</label>
+    <div class="role-box">
+      <div class="role active" onclick="selectRole(this)">🍽️ Mess</div>
+      <div class="role" onclick="selectRole(this)">❤️ NGO</div>
+    </div>
+
+    <button onclick="login()">Continue</button>
+
+    <div class="footer">
+      Reducing food waste, one meal at a time ❤️
+    </div>
+
+  </div>
+
+  <script>
+    function selectRole(el) {
+      document.querySelectorAll(".role").forEach(r => r.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    function login() {
+      // Temporary redirect (you can change later)
+      window.location.href = "donate.html";
+    }
+  </script>
+
+</body>
+</html>

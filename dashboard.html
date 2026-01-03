@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FoodLink | NGO Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#1c7c54,#2f9e44);
+  padding:30px;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:30px;
+}
+.header img{
+  height:60px;
+}
+.header h1{
+  color:white;
+  font-size:26px;
+}
+
+/* DASHBOARD CARD */
+.dashboard{
+  background:#ffffff;
+  border-radius:24px;
+  padding:30px;
+}
+
+/* INFO BAR */
+.info{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+.info div{
+  background:#f3f4f6;
+  padding:14px 18px;
+  border-radius:14px;
+  font-weight:600;
+  font-size:14px;
+}
+
+/* FOOD LIST */
+.food-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+.food-card{
+  background:#f9fafb;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.05);
+}
+.food-card h3{
+  font-size:18px;
+  margin-bottom:6px;
+}
+.food-card p{
+  font-size:14px;
+  color:#374151;
+  margin-bottom:6px;
+}
+
+.badge{
+  display:inline-block;
+  background:#e6f7ee;
+  color:#166534;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:600;
+}
+
+/* BUTTON */
+.pickup{
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:12px;
+  background:#2f9e44;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+}
+.pickup:hover{
+  background:#22863a;
+}
+
+/* FOOTER */
+.footer{
+  margin-top:20px;
+  text-align:center;
+  font-size:13px;
+  color:#6b7280;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .header{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <img src="images/foodlink.png.jpeg" alt="FoodLink Logo">
+  <h1>NGO Dashboard</h1>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+
+  <!-- INFO -->
+  <div class="info">
+    <div>📍 Nearby Mess: ABC Engineering College</div>
+    <div>⏰ Fresh for: 4 hours</div>
+  </div>
+
+  <!-- FOOD CARDS -->
+  <div class="food-list">
+
+    <div class="food-card">
+      <h3>🍚 Rice</h3>
+      <p>Quantity: <b>25 kg</b></p>
+      <span class="badge">Fresh</span>
+      <button class="pickup">Request Pickup</button>
+    </div>
+
+    <div class="food-card">
+      <h3>🥣 Dal</h3>
+      <p>Quantity: <b>12 kg</b></p>
+      <span class="badge">Fresh</span>
+      <button class="pickup">Request Pickup</button>
+    </div>
+
+    <div class="food-card">
+      <h3>🥦 Sabzi</h3>
+      <p>Quantity: <b>10 kg</b></p>
+      <span class="badge">Fresh</span>
+      <button class="pickup">Request Pickup</button>
+    </div>
+
+    <div class="food-card">
+      <h3>🍰 Sweets</h3>
+      <p>Quantity: <b>6 kg</b></p>
+      <span class="badge">Fresh</span>
+      <button class="pickup">Request Pickup</button>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    🤝 Connecting surplus food with NGOs in real-time
+  </div>
+
+</div>
+
+</body>
+</html>

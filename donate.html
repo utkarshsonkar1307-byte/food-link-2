@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FoodLink | Donate Food</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Segoe UI",system-ui,sans-serif;
+}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#2f9e44,#1c7c54);
+  display:flex;
+}
+
+/* LEFT */
+.left{
+  width:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.left img{
+  width:300px;
+  max-width:80%;
+}
+
+/* RIGHT */
+.right{
+  width:50%;
+  background:#fff;
+  border-radius:30px 0 0 30px;
+  padding:40px;
+  overflow-y:auto;
+}
+
+h1{
+  font-size:28px;
+  margin-bottom:6px;
+}
+.subtitle{
+  color:#6b7280;
+  margin-bottom:20px;
+  font-size:14px;
+}
+
+/* FOOD GRID */
+.food-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-bottom:20px;
+}
+.food{
+  background:#f3f4f6;
+  border-radius:16px;
+  padding:16px;
+  text-align:center;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+.food span{
+  display:block;
+  font-size:26px;
+  margin-bottom:6px;
+}
+.food.active{
+  background:#e6f7ee;
+  border-color:#2f9e44;
+  font-weight:600;
+}
+
+/* SELECTED LIST */
+.selected-box{
+  background:#f9fafb;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:20px;
+}
+.item-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+.item-row span{
+  width:80px;
+  font-weight:600;
+}
+.item-row input{
+  flex:1;
+  padding:8px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+}
+.remove{
+  background:#ef4444;
+  color:#fff;
+  border:none;
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* INPUT */
+label{
+  font-size:13px;
+  margin-bottom:6px;
+  display:block;
+}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #d1d5db;
+  margin-bottom:16px;
+}
+
+/* BUTTON */
+button.main{
+  width:100%;
+  padding:14px;
+  background:#2f9e44;
+  color:white;
+  border:none;
+  border-radius:14px;
+  font-size:16px;
+  cursor:pointer;
+}
+button.main:hover{
+  background:#22863a;
+}
+
+.footer{
+  text-align:center;
+  font-size:13px;
+  margin-top:14px;
+  color:#6b7280;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  body{flex-direction:column;}
+  .left,.right{width:100%;border-radius:0;}
+  .left img{width:220px;margin:30px 0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LEFT -->
+<div class="left">
+  <img src="images/foodlink.png.jpeg" alt="FoodLink Logo">
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+  <h1>Donate Surplus Food</h1>
+  <div class="subtitle">Select food & add quantity (KG)</div>
+
+  <!-- FOOD GRID -->
+  <div class="food-grid">
+    <div class="food" onclick="addFood(this,'Rice')"><span>🍚</span>Rice</div>
+    <div class="food" onclick="addFood(this,'Dal')"><span>🥣</span>Dal</div>
+    <div class="food" onclick="addFood(this,'Sabzi')"><span>🥦</span>Sabzi</div>
+    <div class="food" onclick="addFood(this,'Roti')"><span>🍞</span>Roti</div>
+    <div class="food" onclick="addFood(this,'Sweets')"><span>🍰</span>Sweets</div>
+    <div class="food" onclick="addFood(this,'Other')"><span>🍲</span>Other</div>
+  </div>
+
+  <!-- SELECTED ITEMS -->
+  <div class="selected-box" id="selectedBox">
+    <b>Selected Food Items</b>
+  </div>
+
+  <label>Food fresh for (hours)</label>
+  <input type="number" placeholder="e.g. 4">
+
+  <button class="main" onclick="submitFood()">Notify NGOs</button>
+
+  <div class="footer">
+    ❤️ Reducing food waste, one meal at a time
+  </div>
+</div>
+
+<script>
+const selectedBox = document.getElementById("selectedBox");
+const selected = {};
+
+function addFood(el,name){
+  if(selected[name]) return;
+
+  el.classList.add("active");
+  selected[name]=el;
+
+  const row=document.createElement("div");
+  row.className="item-row";
+  row.id="row-"+name;
+
+  row.innerHTML=`
+    <span>${name}</span>
+    <input type="number" placeholder="kg">
+    <button class="remove" onclick="removeFood('${name}')">Remove</button>
+  `;
+  selectedBox.appendChild(row);
+}
+
+function removeFood(name){
+  selected[name].classList.remove("active");
+  document.getElementById("row-"+name).remove();
+  delete selected[name];
+}
+
+function submitFood(){
+
+  const foodItems = [];
+
+  Object.keys(selected).forEach(name => {
+    const qtyInput = document.querySelector(`#row-${name} input`);
+    const qty = qtyInput.value;
+
+    if(qty && qty > 0){
+      foodItems.push({
+        name: name,
+        quantity: qty
+      });
+    }
+  });
+
+  if(foodItems.length === 0){
+    alert("Please add at least one food item with quantity");
+    return;
+  }
+
+  const freshHours = document.querySelector('input[type="number"]').value;
+
+  const donationData = {
+    college: "ABC Engineering College",
+    freshHours: freshHours,
+    time: new Date().toLocaleString(),
+    items: foodItems
+  };
+
+  localStorage.setItem("donationData", JSON.stringify(donationData));
+
+  // ➜ GO TO DASHBOARD
+  window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>
